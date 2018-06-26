@@ -7,11 +7,22 @@ class MemoryCard extends Component {
     clicked: false
   }
 
-  componentDidMount () { 
-    console.log('Child ' + this.props.id + ' has been mounted')
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.gameOver) {
+      this.setState({ clicked: false })
+    }
   }
-  componentWillUnmount() {
-    console.log('Child ' + this.props.id + ' has been unmounted')
+
+  roundIncrement = (clicked) => {
+    const {  data, updatePositions, shuffleFriends, incrementScore } = this.props;
+    this.setState({ clicked: true });
+    incrementScore();
+    updatePositions(shuffleFriends(data));
+  }
+
+  handleClick = () => {
+    const { endGame } = this.props;
+    !this.state.clicked ? this.roundIncrement(true) : endGame(this.state.clicked);
   }
 
   render() {
@@ -20,7 +31,9 @@ class MemoryCard extends Component {
         <div className="img-container">
           <img alt="a cat" src={this.props.img} />
         </div>
-        <button onClick={() => !this.state.clicked? this.setState({ clicked: true }) : console.log('c') } className="remove btn btn-danger">
+        <button
+          className="remove btn btn-danger"
+          onClick={() => this.handleClick()}>
           Select Cat
       </button>
       </div>
