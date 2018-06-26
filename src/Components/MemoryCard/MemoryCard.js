@@ -11,7 +11,6 @@ class MemoryCard extends Component {
     if (nextProps.gameOver) {
       this.setState({ clicked: false })
     }
-    this.props.switchGameOver();
   }
 
   roundIncrement = (clicked) => {
@@ -22,6 +21,7 @@ class MemoryCard extends Component {
   }
 
   handleClick = () => {
+    this.props.switchGameOver();
     const { endGame } = this.props;
     !this.state.clicked ? this.roundIncrement(true) : endGame(this.state.clicked);
   }

@@ -14,7 +14,7 @@ class App extends Component {
   };
 
   updatePositions = (data) => {
-   this.setState({ data });
+    this.setState({ data });
   }
 
   // Shuffle (truly random)
@@ -22,9 +22,9 @@ class App extends Component {
     // Don't mutate original
     let copy = data.slice();
     copy = copy
-    .map(friend => [Math.random(), friend])
-    .sort((a,b) => a[0] - b[0])
-    .map(a => a[1]);
+      .map(friend => [Math.random(), friend])
+      .sort((a, b) => a[0] - b[0])
+      .map(a => a[1]);
 
     return copy;
   }
@@ -38,7 +38,7 @@ class App extends Component {
     let shuffledData = this.shuffleFriends(data);
 
     if (this.state.score > this.state.highScore) {
-      this.setState({ highScore: this.state.score, score: 0, data: shuffledData, gameOver})
+      this.setState({ highScore: this.state.score, score: 0, data: shuffledData, gameOver })
     } else {
       this.setState({ score: 0, data: shuffledData, gameOver });
     }
@@ -54,23 +54,22 @@ class App extends Component {
         <Title> Memory Game </Title>
         <Title>Score: {this.state.score}</Title>
         <Title>High Score: {this.state.highScore}</Title>
-          {
-            this.state.data.map(cat => (
-              <MemoryCard
-                data={this.state.data}
-                gameOver={this.state.gameOver}
-                switchGameOver={this.state.switchGameOver}
-                manageClicked={this.manageClicked}
-                updatePositions={this.updatePositions}
-                shuffleFriends={this.shuffleFriends}
-                incrementScore={this.incrementScore}
-                endGame={this.endGame}
-                key={cat.id}
-                id={cat.id}
-                img={cat.img}
-              />
-            ))
-          }
+        {
+          this.state.data.map(cat => (
+            <MemoryCard
+              data={this.state.data}
+              gameOver={this.state.gameOver}
+              switchGameOver={this.switchGameOver}
+              updatePositions={this.updatePositions}
+              shuffleFriends={this.shuffleFriends}
+              incrementScore={this.incrementScore}
+              endGame={this.endGame}
+              key={cat.id}
+              id={cat.id}
+              img={cat.img}
+            />
+          ))
+        }
         {/* <button onClick={() => this.updatePositions(this.shuffleFriends(data))}>Shuffle</button>
         <button onClick={this.incrementScore}>Increment Score</button>
         <button onClick={this.endGame}>End Game</button> */}
