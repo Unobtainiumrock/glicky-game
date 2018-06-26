@@ -10,6 +10,7 @@ class MemoryCard extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.gameOver) {
       this.setState({ clicked: false })
+      this.props.switchGameOver();
     }
   }
 

@@ -44,6 +44,10 @@ class App extends Component {
     }
   }
 
+  switchGameOver = () => {
+    this.setState({ gameOver: false });
+  }
+
   render() {
     return (
       <Wrapper>
@@ -55,7 +59,8 @@ class App extends Component {
               <MemoryCard
                 data={this.state.data}
                 gameOver={this.state.gameOver}
-                // manageClicked={this.manageClicked}
+                switchGameOver={this.state.switchGameOver}
+                manageClicked={this.manageClicked}
                 updatePositions={this.updatePositions}
                 shuffleFriends={this.shuffleFriends}
                 incrementScore={this.incrementScore}
