@@ -4,22 +4,25 @@ import './MemoryCard.css';
 
 class MemoryCard extends Component {
   state = {
-    something: 5
+    clicked: false
   }
 
+  componentDidMount () { 
+    console.log('Child ' + this.props.id + ' has been mounted')
+  }
+  componentWillUnmount() {
+    console.log('Child ' + this.props.id + ' has been unmounted')
+  }
 
   render() {
     return (
-      <div className="row" id={this.props.data.id}>
-        <div className="col">
-          <img src={this.props.data.img} alt="A cute cat" />
-          <div>
-            <h2>{this.props.data.header}</h2>
-            <p>{this.props.data.description}</p>
-            <button data-id={this.props.data.id} className="btn btn-danger add-note">Select</button>
-          </div>
+      <div className="card">
+        <div className="img-container">
+          <img alt="a cat" src={this.props.img} />
         </div>
-        <br />
+        <button onClick={() => !this.state.clicked? this.setState({ clicked: true }) : console.log('c') } className="remove btn btn-danger">
+          Select Cat
+      </button>
       </div>
     )
   }
